@@ -43,8 +43,8 @@ clone the node application and install dependencies
 git clone https://github.com/ejiro/NodeSearch.git
 cd NodeSearch; npm install
 
-start the application
-nohup node app.js
+start the application (be_ip is the elastis search internal backend ip, fe_ip is the public node frontend ip)
+nohup node app.js --be_ip <be_ip> --fe_ip <fe_ip> &
 
 app should be available at:
 http://localhost:8080/search?terms={}
