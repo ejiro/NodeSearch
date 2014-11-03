@@ -17,3 +17,28 @@ How about `programming languages` where engineers hack on `Macs`?
 And what kinds of `beer` do `Go` developers drink?
 
 The service provides an HTTP endpoint and accept and return JSON to any requests.
+
+Steps to Run in Google Cloud:
+
+update packages:
+sudo apt-get update
+
+install nodejs:
+sudo apt-get install git nodejs
+sudo update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
+
+install npm
+curl https://www.npmjs.org/install.sh | sudo sh
+
+install elastic search:
+sudo apt-get install openjdk-7-jdk
+java -version
+wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb
+sudo dpkg -i elasticsearch-1.3.4.deb
+sudo /etc/init.d/elasticsearch start
+curl -X GET 'http://localhost:9200'
+
+clone the node application and install dependencies
+git clone https://github.com/ejiro/NodeSearch.git
+cd NodeSearch; npm install
+
