@@ -22,6 +22,20 @@ router.get('/', function(req, res) {
 
 
 /**
+ * Extends Object to have a simplified size function
+ * that returns the number of items in the obj
+ * @param obj
+ * @returns {number}  Number of items in the object
+ */
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+/**
  * Simply interface for pinging elastic search connectivity
  */
 function pingSearch() {
@@ -47,61 +61,49 @@ function pingSearch() {
  * @param res Node Server Response object
  */
 function search(terms, req, res) {
-    var queryObj =  JSON.parse(terms);
-    // Get the size of an object
-    var size = Object.size(queryObj);
-    if(size > 0) {
-        //construct query string for elastic search
-        var queryString = null;
-        for( var key in queryObj){
-            var value = queryObj[key]
-            if (queryString) {
-                queryString = queryString + " AND (" + key + ":" + value + ")"
-            }else {
-                queryString = "(" + key + ":" + value + ")"
-            }
-        }
-        //Uses elastic search clean to query for search result using Promise mechanism
-        client.search({
-            index: 'tutorial',
-            type: 'trends',
-            body: {
-                query: {
-                    query_string: { query: queryString }
+    if(terms == null){
+        res.render('search', {title: 'Advance Search', query: "{}", results: []});
+    }else {
+        var queryObj = JSON.parse(terms);
+        // Get the size of an object
+        var size = Object.size(queryObj);
+        if (size > 0) {
+            //construct query string for elastic search
+            var queryString = null;
+            for (var key in queryObj) {
+                var value = queryObj[key]
+                if (queryString) {
+                    queryString = queryString + " AND (" + key + ":" + value + ")"
+                } else {
+                    queryString = "(" + key + ":" + value + ")"
                 }
             }
-        }).then(function (body) {
-            //success aggregate result and render to Jade template
-            var hits = body.hits.hits;
-            var out = [];
-            for (var i = 0; i < hits.length; i++) {
-                out[i] = hits[i]._source
-            }
-            var results = JSON.stringify(out, null, 4);
-            res.render('search', {title: 'Advance Search', query: terms, results: results});
-        }, function (error) {
-            //failed print to console
-            console.trace(error.message);
-        });
-    }else{
-        //do nothing??
-        var results = [];
-        res.render('search', {title: 'Advance Search', query: terms, results: results});
+            //Uses elastic search clean to query for search result using Promise mechanism
+            client.search({
+                index: 'tutorial',
+                type: 'trends',
+                body: {
+                    query: {
+                        query_string: {query: queryString}
+                    }
+                }
+            }).then(function (body) {
+                //success aggregate result and render to Jade template
+                var hits = body.hits.hits;
+                var out = [];
+                for (var i = 0; i < hits.length; i++) {
+                    out[i] = hits[i]._source
+                }
+                var results = JSON.stringify(out, null, 4);
+                res.render('search', {title: 'Advance Search', query: terms, results: results});
+            }, function (error) {
+                //failed print to console
+                console.trace(error.message);
+            });
+        } else {
+            res.render('search', {title: 'Advance Search', query: terms, results: []});
+        }
     }
 }
-
-/**
- * Extends Object to have a simplified size function
- * that returns the number of items in the obj
- * @param obj
- * @returns {number}  Number of items in the object
- */
-Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
 
 module.exports = router;
