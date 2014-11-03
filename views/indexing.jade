@@ -1,0 +1,13 @@
+doctype html
+
+//Created by Ejiro on 11/1/14.
+extends layout
+block content
+    h3= title
+
+    if desc
+        p #{desc}
+    else
+        div#snippet
+            pre
+                code #{results}

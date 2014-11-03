@@ -1,0 +1,45 @@
+doctype html
+
+//Created by Ejiro on 11/1/14.
+extends layout
+
+block content
+   h3= title
+   div.search-box
+      form#search.dark-matter.searchform(name="form", action="/search", method="get")
+         h1
+            span Please fill the form to find out trends
+         label
+            span Name :
+            input(type="text", name="name", placeholder="Programmer's Name")
+
+         label
+            span Beer :
+            input(type="text", name="favoriteBeer", placeholder="Favorite Beer")
+
+         label
+            span OS :
+            input(type="text", name="os", placeholder="Operating System")
+
+         label
+            span Language :
+            input(type="text", name="programmingLanguage", placeholder="Programming Language")
+
+         label
+            span Commits :
+            input(type="text", name="numCommits", placeholder="Number Of Commit")
+
+         label
+            span &nbsp;
+            input.button(type="submit", value="submit")
+
+   hr
+   h3 Query
+   code #{query}
+   br
+   br
+
+   h3 Results
+   div#snippet
+      pre
+         code #{results}
