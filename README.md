@@ -18,7 +18,8 @@ And what kinds of `beer` do `Go` developers drink?
 
 The service provides an HTTP endpoint and accept and return JSON to any requests.
 
-Steps to Run in Google Cloud:
+Steps to Run in Linux:
+++++++++++++++++++++++
 
 update packages:
 sudo apt-get update
@@ -42,3 +43,9 @@ clone the node application and install dependencies
 git clone https://github.com/ejiro/NodeSearch.git
 cd NodeSearch; npm install
 
+start the application
+nohup node app.js
+
+app should be available at:
+http://localhost:8080/search?terms={}
+http://localhost:8080/index?terms={}
