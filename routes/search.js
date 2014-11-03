@@ -4,10 +4,10 @@
 
 var express = require('express');
 var elasticsearch = require('elasticsearch');
-
+var argv = require('optimist').argv;
 
 var client = new elasticsearch.Client({
-    host: 'localhost:9200',
+    host: argv.fe_ip+':9200',
     log: 'trace'
 });
 
