@@ -1,5 +1,5 @@
-Search: Node/Express/ElasticSearch
-==================================
+###Search: Node/Express/Jade/ElasticSearch
+###========================================
 
 A service that accepts JSON documents as data, and then provides an interface to search
 and give aggregated results on the data.
@@ -20,26 +20,26 @@ And what kinds of `beer` do `Go` developers drink?
 
 The service provides an HTTP endpoint and accept and return JSON to any requests.
 
-###Steps to Run in Linux:
-++++++++++++++++++++++
+####Steps to Run in Linux/Unix Environment:
+####++++++++++++++++++++++++++++++++++++++
 
-**update packages:**
+**Update linux/unix packages:**
 <pre>
 $ sudo apt-get update
 </pre>
 
-**install nodejs:**
+**Install nodejs:**
 <pre>
 $ sudo apt-get install git nodejs
 $ sudo update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
 </pre>
 
-**install npm**
+**Install node package manager**
 <pre>
 $ curl https://www.npmjs.org/install.sh | sudo sh
 </pre>
 
-**install elastic search:**
+**Install elastic search:**
 <pre>
 $ sudo apt-get install openjdk-7-jdk
 $ java -version
@@ -49,19 +49,41 @@ $ sudo /etc/init.d/elasticsearch start
 $ curl -X GET 'http://localhost:9200'
 </pre>
 
-**clone the node application and install dependencies**
+**Clone the node application and install dependencies**
 <pre>
 $ git clone https://github.com/ejiro/NodeSearch.git
 $ cd NodeSearch; npm install
 </pre>
 
-**start the application (be_ip is the elastis search internal backend ip, fe_ip is the internal frontend ip)**
+**Start the application (be_ip is the elastis search internal backend ip, fe_ip is the internal frontend ip)**
 <pre>
-nohup node app.js --be_ip <be_ip> --fe_ip <fe_ip> &
+$ nohup node app.js --be_ip <be_ip> --fe_ip <fe_ip> &
 </pre>
 
-**if your be_ip and fe_ip and set to localhost, then app should be available at:**
+
+####Indexing and Searching Documents:
+####++++++++++++++++++++++++++++++++++++++
+
+**App should be available at your external ip (eg localhost if developing locally):**
 <pre>
-http://localhost:8080/search?terms={}
-http://localhost:8080/index?terms={}
+http://external_ip:8080/search?terms={}
+http://external_ip:8080/index?terms={}
+</pre>
+
+
+####Extras (Optional) Commands:
+####++++++++++++++++++++++++++++++++++++++
+Check if node is installed and Running as well as killing node process
+<pre>
+$ node -v
+$ ps aux | grep node
+$ killall node
+</pre>
+
+Indexing and Searching and Deleting document directly from elastic search
+See more at: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs.html
+<pre>
+curl -XPUT 'http://be_ip:9200/index/type/id' -d '{}'
+curl -XGET 'http://be_ip:9200/index/type/id'
+curl -XDELETE 'http://be_ip:9200/index/type/id'
 </pre>

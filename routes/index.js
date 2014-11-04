@@ -8,7 +8,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Node/Express/ElasticSearch',
-    desc: 'Now that...instructions coming soon'});
+    desc: 'Now what...instructions coming soon'});
 });
 
 module.exports = router;
