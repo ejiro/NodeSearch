@@ -57,7 +57,7 @@ $ cd NodeSearch; npm install
 
 **Start the application (be_ip is the elastis search internal backend ip, fe_ip is the internal frontend ip)**
 <pre>
-$ nohup node app.js --be_ip <be_ip> --fe_ip <fe_ip> &
+$ nohup node app.js --be_ip '<be_ip>' --fe_ip '<fe_ip>' &
 </pre>
 
 

@@ -69,7 +69,8 @@ app.use(function(err, req, res, next) {
 });
 
 // listen (start app with node server.js) ======================================
-app.listen(8080, argv.fe_ip);
-console.log("App listening on port 8080 with host_ip: "+argv.fe_ip);
+var fe_ip = argv.fe_ip || "localhost";
+app.listen(8080, fe_ip);
+console.log("App listening on port 8080 with host_ip: " + fe_ip);
 
 module.exports = app;
