@@ -24,30 +24,41 @@ The service provides an HTTP endpoint and accept and return JSON to any requests
 ++++++++++++++++++++++
 
 **update packages:**
->sudo apt-get update
+<pre>
+$ sudo apt-get update
+</pre>
 
 **install nodejs:**
->sudo apt-get install git nodejs
->sudo update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
+<pre>
+$ sudo apt-get install git nodejs
+$ sudo update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
+</pre>
 
 **install npm**
->curl https://www.npmjs.org/install.sh | sudo sh
+<pre>
+$ curl https://www.npmjs.org/install.sh | sudo sh
+</pre>
 
 **install elastic search:**
->sudo apt-get install openjdk-7-jdk
->java -version
->wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb
->sudo dpkg -i elasticsearch-1.3.4.deb
->sudo /etc/init.d/elasticsearch start
->curl -X GET 'http://localhost:9200'
+<pre>
+$ sudo apt-get install openjdk-7-jdk
+$ java -version
+$ wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb
+$ sudo dpkg -i elasticsearch-1.3.4.deb
+$ sudo /etc/init.d/elasticsearch start
+$ curl -X GET 'http://localhost:9200'
+</pre>
 
 **clone the node application and install dependencies**
->git clone https://github.com/ejiro/NodeSearch.git
->cd NodeSearch; npm install
+<pre>
+$ git clone https://github.com/ejiro/NodeSearch.git
+$ cd NodeSearch; npm install
+</pre>
 
 **start the application (be_ip is the elastis search internal backend ip, fe_ip is the internal frontend ip)**
->nohup node app.js --be_ip <be_ip> --fe_ip <fe_ip> &
-
+<pre>
+nohup node app.js --be_ip <be_ip> --fe_ip <fe_ip> &
+</pre>
 
 **if your be_ip and fe_ip and set to localhost, then app should be available at:**
 <pre>
